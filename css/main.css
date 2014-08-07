@@ -446,3 +446,8 @@ html, body {
     -webkit-animation: pop 200ms linear;
     animation: pop 200ms linear;
 }
+
+.center {
+    margin: 8px;
+    text-align: center;
+}
