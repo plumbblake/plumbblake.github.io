@@ -16,9 +16,9 @@ $(function () {
     var $instructions = $('#instructions');
     var $document = $(document);
     var events = [];
-    var bestScore = localStorage.getItem('bestScore') || 0;
+    var bestScore = parseInt(localStorage.getItem('bestScore'),10) || 0;
     var currentGame = localStorage.getItem('currentGame') || '';
-    var currentScore = localStorage.getItem('currentScore') || 0;
+    var currentScore = parseInt(localStorage.getItem('currentScore'),10) || 0;
 
     $('#best-score-placeholder').text(bestScore);
 
@@ -195,22 +195,5 @@ $(function () {
     $.subscribe('gameWon', function () {
         unbindEvents();
         gameWon();
-    });
-
-    /*Phonegap specific code*/
-
-    var isPhonegap = function (){
-        return document.location.protocol !== 'https:' && document.location.protocol !== 'http:';
-    }
-
-    if (isPhonegap) {
-        var onDeviceReady = function () {
-            admobAd.initBanner("ca-app-pub-2085250732225736/1803528207", admobAd.AD_SIZE.SMART_BANNER.width, admobAd.AD_SIZE.SMART_BANNER.height);
-            admobAd.showBanner(admobAd.AD_POSITION.BOTTOM_CENTER);
-            navigator.splashscreen.hide();
-        }
-
-        document.addEventListener('deviceready', onDeviceReady, false);
-    }
-    
+    });  
 });
