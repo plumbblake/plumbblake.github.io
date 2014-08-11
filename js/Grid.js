@@ -4,8 +4,6 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
     var score = 0;
     var maxValue = 2048;
     var endOfArray = size - 1;
-    var isDontUpdate = false;
-    var preventInfinityScoring = 0;
 
     var gamePieceArray = [];
     var updateArray = [];
@@ -15,24 +13,6 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
             array.pop();
         }
     }
-
-    var clone = function (obj) {
-        var cloneObj = {};
-        if (Array.isArray(obj)) {
-            cloneObj = [];
-            var length = obj.length;
-            for (var x = 0; x < length; x++) {
-                cloneObj[x] = clone(obj[x]);
-            }
-        } else if (typeof obj === "object" && obj !== null) {
-            for (var key in obj) {
-                cloneObj[key] = clone(obj[key]);
-            }
-        } else {
-            cloneObj = obj;
-        }
-        return cloneObj;
-    };
 
     var getAvailableGamePieces = function () {
         var available = [];
@@ -46,7 +26,7 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
         }
         return available;
     }
-    
+
     var getRandomAvailableGamePiece = function () {
         var available = getAvailableGamePieces();
         if (available.length === 0) {
@@ -104,11 +84,7 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
     }
 
     var addScore = function (value) {
-        score += value;
-    }
-
-    var subtractScore = function (value) {
-        score -= value;
+            score += value;
     }
 
     var getNewClosest = function (old, current) {
@@ -151,8 +127,8 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
     var replace = function (old, current) {
         updateArray.push({
             transition: 'replace',
-            old: {y: old.y, x: old.x},
-            current: {y: current.y, x: current.x}
+            old: { y: old.y, x: old.x },
+            current: { y: current.y, x: current.x }
         });
         old.isActive = true;
         old.value = current.value;
@@ -163,7 +139,9 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
 
     var merge = function (old, current, obj) {
         if (old.value === current.value) {
-            obj.action(old.value * 2);
+            if (obj) {
+                obj.action(old.value * 2);
+            }
             updateArray.push({
                 transition: 'merge',
                 old: { y: old.y, x: old.x, value: old.value },
@@ -187,12 +165,16 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
                 old: { y: old.y, x: old.x },
                 current: { y: current.y, x: current.x }
             });
-            obj.action1(current.value);
+            if (obj.action1) {
+                obj.action1(current.value);
+            }
             reset(current);
             return getNewClosest(old, current);
         }
         else if (old.value < current.value) {
-            obj.action2(old.value);
+            if (obj.action2) {
+                obj.action2(old.value);
+            }
             replace(old, current);
             return getNewClosest(old, current);
         }
@@ -200,17 +182,17 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
 
     var attack = function (old, current, obj) {
         if (old.health <= current.value) {
-            obj.action(old.health);
+            if (obj) {
+                obj.action(old.health);
+            }
             if (current.type === 'knight') {
                 updateArray.push({
                     transition: 'attackEnd',
                     old: { y: old.y, x: old.x },
                     current: { y: current.y, x: current.x }
                 });
-                if (!isDontUpdate) {
-                    $.publish({ type: 'gameWon' });
-                    isGameEnded = true;
-                }
+                $.publish({ type: 'gameWon' });
+                isGameEnded = true;
             }
             else {
                 updateArray.push({
@@ -218,14 +200,14 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
                     old: { y: old.y, x: old.x },
                     current: { y: current.y, x: current.x }
                 });
-                if (!isDontUpdate) {
-                    $.publish({ type: 'gameOver' });
-                    isGameEnded = true;
-                } 
+                $.publish({ type: 'gameOver' });
+                isGameEnded = true;
             }
         }
         else {
-            obj.action(current.value);
+            if (obj) {
+                obj.action(current.value);
+            }
             updateArray.push({
                 transition: 'attack',
                 old: { y: old.y, x: old.x, health: old.health },
@@ -239,19 +221,19 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
 
     var compareGamePieces = function (old, current) {
         if (current.isActive) {
-            if(current.type === 'castle' || current.type === 'cave'){
+            if (current.type === 'castle' || current.type === 'cave') {
                 return current;
             }
-            else{  
+            else {
                 if (current.type === 'troll') {
                     if (old.type === 'troll') {
-                        return merge(old, current, { action: subtractScore });
+                        return merge(old, current);
                     }
                     else if (old.type === 'knight') {
-                        return battle(old, current, {action1: addScore, action2: subtractScore});
+                        return battle(old, current, { action1: addScore });
                     }
                     else if (old.type === 'castle') {
-                        return attack(old, current, {action: subtractScore});
+                        return attack(old, current);
                     }
                     else {
                         return setNewClosest(old, current);
@@ -262,10 +244,10 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
                         return merge(old, current, { action: addScore });
                     }
                     else if (old.type === 'troll') {
-                        return battle(old, current, { action1: subtractScore, action2: addScore });
+                        return battle(old, current, { action2: addScore });
                     }
                     else if (old.type === 'cave') {
-                        return attack(old, current, {action: addScore});
+                        return attack(old, current, { action: addScore });
                     }
                     else {
                         return setNewClosest(old, current);
@@ -277,20 +259,10 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
         }
     }
 
-    var checkForPossibleMoves = function () {
-        var tempArray = clone(gamePieceArray);
-        isDontUpdate = true;
-        if (self.up() && self.down() && self.left() && self.right()) {
-            $.publish({ type: 'gameOver' });
-        }
-        isDontUpdate = false;
-        gamePieceArray = clone(tempArray);
-    }
-
     var gridUpdate = function () {
-            var isUndefined = false;
+        if (updateArray.length !== 0) {
             var updateCharacters = ['troll', 'knight'];
-            var possibleValues = [[2, 4], [4, 8], [8, 16], [16, 32], [32, 64], [64, 128], [128, 256], [256, 512], [512, 1024]];
+            var possibleValues = [[2, 4], [4, 8], [8, 16], [16, 32], [32, 64], [64, 128], [128, 256]];
             var possibleValuesEnd = possibleValues.length - 1;
             for (var i = 0; i < updateCharacters.length; i++) {
                 var gamePiece = getRandomAvailableGamePiece();
@@ -300,11 +272,8 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
                     gamePiece.type = updateCharacters[i];
                     if (gamePiece.type === 'troll') {
                         var end
-                        var trollStrength = Math.round(maxValue / gamePieceArray[endOfArray][endOfArray].health);
-                        if (trollStrength < preventInfinityScoring) {
-                            trollStrength = preventInfinityScoring;
-                        }
-                        trollStrength--;
+                        var trollStrength = Math.round(maxValue / gamePieceArray[endOfArray][endOfArray].health) - 1;
+
                         if (possibleValues[trollStrength]) {
                             gamePiece.value = Math.random() < likeliHood ? possibleValues[trollStrength][0] : possibleValues[trollStrength][1];
                         }
@@ -321,14 +290,11 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
                     });
                 }
                 else {
-                    isUndefined = true;
+                    var dontIncreaseScore = parseInt(localStorage.getItem('currentScore'), 10);
+                    if (dontIncreaseScore) {
+                        score = dontIncreaseScore;
+                    }
                 }
-            }
-            if (isUndefined) {
-                preventInfinityScoring++;
-            }
-            else {
-                preventInfinityScoring = trollStrength;
             }
             if (score > bestScore) {
                 bestScore = score;
@@ -337,90 +303,66 @@ var Grid = function (size, bestScore, currentGame, currentScore) {
             localStorage.setItem('currentGame', JSON.stringify(gamePieceArray));
             localStorage.setItem('currentScore', score);
             $.publish({ type: 'gridUpdate', value: updateArray, score: score, bestScore: bestScore });
-            checkForPossibleMoves();
+        }
     }
 
     self.up = function () {
-        emptyArray(updateArray);
-        for (var i = 0; i < gamePieceArray.length; i++) {
-            var topMost = gamePieceArray[0][i];
-            for (var j = 0; j < gamePieceArray.length; j++) {
-                if (topMost !== gamePieceArray[j][i]) {
-                    topMost = compareGamePieces(topMost, gamePieceArray[j][i]);
+        if (!isGameEnded) {
+            emptyArray(updateArray);
+            for (var i = 0; i < gamePieceArray.length; i++) {
+                var topMost = gamePieceArray[0][i];
+                for (var j = 0; j < gamePieceArray.length; j++) {
+                    if (topMost !== gamePieceArray[j][i]) {
+                        topMost = compareGamePieces(topMost, gamePieceArray[j][i]);
+                    }
                 }
             }
-        }
-        if (updateArray.length !== 0) {
-            if (!isDontUpdate) {
-                gridUpdate();
-            }
-            return false;
-        }
-        else {
-            return true;
+            gridUpdate();
         }
     }
 
     self.down = function () {
-        emptyArray(updateArray);
-        for (var i = endOfArray; i > -1; i--) {
-            var bottomMost = gamePieceArray[endOfArray][i];
-            for (var j = endOfArray; j > -1; j--) {
-                if (bottomMost !== gamePieceArray[j][i]) {
-                    bottomMost = compareGamePieces(bottomMost, gamePieceArray[j][i]);
-                }        
+        if (!isGameEnded) {
+            emptyArray(updateArray);
+            for (var i = endOfArray; i > -1; i--) {
+                var bottomMost = gamePieceArray[endOfArray][i];
+                for (var j = endOfArray; j > -1; j--) {
+                    if (bottomMost !== gamePieceArray[j][i]) {
+                        bottomMost = compareGamePieces(bottomMost, gamePieceArray[j][i]);
+                    }
+                }
             }
-        }
-        if (updateArray.length !== 0) {
-            if (!isDontUpdate) {
-                gridUpdate();
-            }
-            return false;
-        }
-        else {
-            return true;
+            gridUpdate();
         }
     }
 
     self.left = function () {
-        emptyArray(updateArray);
-        for (var i = 0; i < gamePieceArray.length; i++) {
-            var leftMost = gamePieceArray[i][0];
-            for (var j = 0; j < gamePieceArray.length; j++) {
-                if (leftMost !== gamePieceArray[i][j]) {
-                    leftMost = compareGamePieces(leftMost, gamePieceArray[i][j]);
-                }          
+        if (!isGameEnded) {
+            emptyArray(updateArray);
+            for (var i = 0; i < gamePieceArray.length; i++) {
+                var leftMost = gamePieceArray[i][0];
+                for (var j = 0; j < gamePieceArray.length; j++) {
+                    if (leftMost !== gamePieceArray[i][j]) {
+                        leftMost = compareGamePieces(leftMost, gamePieceArray[i][j]);
+                    }
+                }
             }
-        }
-        if (updateArray.length !== 0) {
-            if (!isDontUpdate) {
-                gridUpdate();
-            }
-            return false;
-        }
-        else {
-            return true;
+            gridUpdate();
         }
     }
 
     self.right = function () {
-        emptyArray(updateArray);
-        for (var i = endOfArray; i > -1; i--) {
-            var rightMost = gamePieceArray[i][endOfArray];
-            for (var j = endOfArray; j > -1; j--) {
-                if (rightMost !== gamePieceArray[i][j]) {
-                    rightMost = compareGamePieces(rightMost, gamePieceArray[i][j]);
-                }               
+        if (!isGameEnded) {
+            emptyArray(updateArray);
+            for (var i = endOfArray; i > -1; i--) {
+                var rightMost = gamePieceArray[i][endOfArray];
+                for (var j = endOfArray; j > -1; j--) {
+                    if (rightMost !== gamePieceArray[i][j]) {
+                        rightMost = compareGamePieces(rightMost, gamePieceArray[i][j]);
+                    }
+                }
             }
-        }
-        if (updateArray.length !== 0) {
-            if (!isDontUpdate) {
-                gridUpdate();
-            }
-            return false;
-        }
-        else {
-            return true;
+            gridUpdate();
         }
     }
 
