@@ -1,47 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
-    <title>2048 Fantasy</title>
+    <title>Blake Plumb</title>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <body>
-<div id="container">
-    <div id="inner">
-        <div id="content">
-            <div id="logo"><img alt="2048 Castle Defend" src="img/logo.png"/></div>
-            <div id="game-info">
-                <div id="score">Score <div id="score-placeholder"></div></div>
-                <div id="best-score">Best <div id="best-score-placeholder"></div></div>
-                <div id="restart">Restart</div>
-            </div>                
-            <div id="battle-field-border">
-                <div id="battle-field"></div>
-                <div id="instructions">
-                    <h2>The evil orcs have invaded the land!</h2>
-                    <p>You must destroy the orcs cave before they destroy our castle.</p>
-                    <p>Move your army by swiping &#8593; &#8595; &#8592; &#8594;</p>
-                    <p>Match same level knights to make them stronger.</p>
-                    <p>Run weaker orcs into your strong knights to defeat them.</p>
-                    <p>Beware: Weakening the orcs cave makes them stronger.</p>
-                    <div id="play">Play</div>
-                </div>
-            </div>
-			<div class="center">
-				<a href="https://play.google.com/store/apps/details?id=com.plumbblake.twentyfortyeightfantasy">
-				  <img alt="Get it on Google Play"
-					   src="img/google-play.png" />
-				</a>
-			</div>
-        </div>
-    </div>
-</div>
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/pubsub.js"></script>
-<script src="js/Controller.js"></script>
-<script src="js/GamePiece.js"></script>
-<script src="js/Grid.js"></script>
-<script src="js/main.js"></script>
+    <section>
+        <bp-navigation>
+            <a slot="home" href="./"><img src="./img/profile.jpg" /></a>
+            <ul slot="site-links">
+                <li><a href="./">About</a></li>
+                <li><a href="">Resume</a></li>
+                <li><a href="">Fun</a></li>
+            </ul>
+        </bp-navigation>
+        <bp-hero>
+            <h1>Hello World <small>I'm Blake</small></h1>
+        </bp-hero>
+    </section>
+<script src="./components/bp-hero.js"></script>
+<script src="./components/bp-navigation.js"></script>
 </body>
 </html>
