@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
-@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
+@import url("https://fonts.googleapis.com/css?family=Space+Mono");
 
-
-
-root {
-    --background-color: #EAE7DC;
-    --primary-color: #E85A4F;
-    --text-color: #8E8D8A;
+:root {
+  --background-color: #e0e0e0;
+  --primary-color: #86c232;
+  --text-color: #222629;
+  --white: #fff;
+  --black: #000;
 }
 /* #EAE7DC background
 #D8C3A5 
@@ -14,12 +14,14 @@ root {
 #E98074
 #E85A4F primary accent */
 
-html, body {
-    margin: 0;
-    background: #000;
-    font-family: 'Space Mono', sans-serif;
+html,
+body {
+  margin: 0;
+  background: var(--background-color);
+  font-family: "Space Mono", sans-serif;
+  font-size: 16px;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }

@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
     <title>Blake Plumb</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-</head>
-<body>
-    <section>
-        <bp-navigation>
-            <a slot="home" href="./"><img src="./img/profile.jpg" /></a>
-            <ul slot="site-links">
-                <li><a href="./">About</a></li>
-                <li><a href="">Resume</a></li>
-                <li><a href="">Fun</a></li>
-            </ul>
-        </bp-navigation>
-        <bp-hero>
-            <h1>Hello World <small>I'm Blake</small></h1>
-        </bp-hero>
-    </section>
-<script src="./components/bp-hero.js"></script>
-<script src="./components/bp-navigation.js"></script>
-</body>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+  </head>
+  <body>
+    <bp-section dark>
+      <bp-navigation>
+        <bp-anchor slot="home" href="./">
+          <bp-image src="./img/profile.jpg"></bp-image>
+        </bp-anchor>
+        <bp-anchor active href="./">About</bp-anchor>
+        <bp-anchor href="">Resume</bp-anchor>
+        <bp-anchor href="2048-fantasy/">Fun</bp-anchor>
+      </bp-navigation>
+      <bp-hero>
+        <bp-heading1>Hello World <bp-small>I'm Blake</bp-small></bp-heading1>
+        <bp-image src="../img/earth.jpg"></bp-image>
+      </bp-hero>
+    </bp-section>
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>
