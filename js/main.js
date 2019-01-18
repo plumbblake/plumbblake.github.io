@@ -1,7 +1,10 @@
-import "../components/bp-navigation.js";
-import "../components/bp-hero.js";
+import "../components/bp-header.js";
+import "../components/bp-footer.js";
 import "../components/bp-image.js";
 import "../components/bp-anchor.js";
 import "../components/bp-section.js";
 import "../components/bp-headings.js";
-import "../components/bp-small.js";
+import "../components/bp-stack.js";
+import "../components/bp-text.js";
+import "../components/bp-polaroid.js";
+import "../components/bp-split.js";

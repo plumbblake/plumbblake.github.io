@@ -10,20 +10,59 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
-    <bp-section dark>
-      <bp-navigation>
-        <bp-anchor slot="home" href="./">
-          <bp-image src="./img/profile.jpg"></bp-image>
-        </bp-anchor>
-        <bp-anchor active href="./">About</bp-anchor>
-        <bp-anchor href="">Resume</bp-anchor>
-        <bp-anchor href="2048-fantasy/">Fun</bp-anchor>
-      </bp-navigation>
-      <bp-hero>
-        <bp-heading1>Hello World <bp-small>I'm Blake</bp-small></bp-heading1>
-        <bp-image src="../img/earth.jpg"></bp-image>
-      </bp-hero>
-    </bp-section>
+    <bp-stack gap-size="32px">
+      <bp-section dark>
+        <bp-stack gap-size="64px">
+          <bp-header>
+            <bp-anchor slot="home" href="./">
+              <bp-image src="./img/profile.jpg"></bp-image>
+            </bp-anchor>
+            <bp-anchor active href="./">About</bp-anchor>
+            <bp-anchor href="">Resume</bp-anchor>
+            <bp-anchor href="2048-fantasy/">Fun</bp-anchor>
+          </bp-header>
+          <bp-stack gap-size="32px">
+            <bp-heading1 center>Hello World</bp-heading1>
+            <bp-heading2 center>I'm Blake</bp-heading2>
+          </bp-stack>
+          <bp-image src="../img/earth.jpg"></bp-image>
+        </bp-stack>
+      </bp-section>
+      <bp-section>
+        <bp-split vertical-center gap-size="32px" min="250px">
+          <bp-polaroid>
+            <bp-image src="../img/family.jpg"></bp-image>
+          </bp-polaroid>
+          <bp-stack>
+            <bp-heading2>My World</bp-heading2>
+            <p>
+              I live in the top of the mountains aka Utah with my beautiful wife
+              and three rambunctious boys. We enjoy nature and architecture,
+              which leads to one of our favorite activities of going for walks
+              and discussing what we like and would change about all the houses
+              we walk past. That might help explain why we have already built
+              two homes.
+            </p>
+            <p>
+              I love developing and creating beautiful User Interfaces. I do not
+              subscribe to the belief that the web cannot be as smooth or fresh
+              of an experience as native applications. I love to collaborate
+              with designers to help create something to be proud of.
+            </p>
+          </bp-stack>
+        </bp-split>
+      </bp-section>
+      <bp-section dark>
+        <bp-footer>
+          <bp-anchor href="https://stackoverflow.com/users/1161353/blake-plumb"
+            >StackOverflow</bp-anchor
+          >
+          <bp-anchor href="https://github.com/plumbblake">GitHub</bp-anchor>
+          <bp-anchor href="https://codepen.io/plumbblake">CodePen</bp-anchor>
+        </bp-footer>
+      </bp-section>
+    </bp-stack>
     <script type="module" src="./js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/show-page.css" />
   </body>
 </html>

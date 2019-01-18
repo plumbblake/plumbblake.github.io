@@ -1,4 +1,4 @@
-class Navigation extends HTMLElement {
+class Header extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
 
@@ -6,12 +6,10 @@ class Navigation extends HTMLElement {
             :host {
                 display: block;
                 width: 100%;
-                max-width: 940px;
-                margin: 0 auto;
             }
             
             nav {
-                padding: 32px 16px; 
+                padding-top: 32px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -37,12 +35,14 @@ class Navigation extends HTMLElement {
 
     shadowRoot.innerHTML = `
             <style>${styles}</style>
-            <nav>
-                <div id="home"><slot name="home"></slot></div>
-                <div id="flex"><slot></slot></div>
-            </nav>
+            <header>
+                <nav>
+                    <div id="home"><slot name="home"></slot></div>
+                    <div id="flex"><slot></slot></div>
+                </nav>
+            </header>
         `;
   }
 }
 
-customElements.define("bp-navigation", Navigation);
+customElements.define("bp-header", Header);

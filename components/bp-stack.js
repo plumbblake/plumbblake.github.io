@@ -1,15 +1,13 @@
-class Small extends HTMLElement {
+class Stack extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
 
     const styles = `
         :host {
-            margin-top: 32px;
-            display: block;
-            font-size: 0.7em;
-            line-height: 1.2;
-        }    
-    `;
+            display: grid;
+            grid-auto-columns: 100%;
+            grid-gap: ${this.getAttribute("gap-size") || "16px"};
+        }`;
 
     shadowRoot.innerHTML = `
             <style>${styles}</style>
@@ -18,4 +16,4 @@ class Small extends HTMLElement {
   }
 }
 
-customElements.define("bp-small", Small);
+customElements.define("bp-stack", Stack);

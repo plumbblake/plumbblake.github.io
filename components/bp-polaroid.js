@@ -1,21 +1,21 @@
 import spreadAttributes from "../js/spreadAttributes.js";
 
-class Image extends HTMLElement {
+class Polaroid extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
 
     const styles = `
-        img {
+        :host {
             display: block;
-            width: 100%;
-            height: auto;
+            border: 5px solid var(--white);
+            box-shadow: 0 4px 6px rgba(0,0,0,.3);
         }`;
 
     shadowRoot.innerHTML = `
             <style>${styles}</style>
-            <img ${spreadAttributes(this.attributes)} />
+            <slot></slot>
         `;
   }
 }
 
-customElements.define("bp-image", Image);
+customElements.define("bp-polaroid", Polaroid);
