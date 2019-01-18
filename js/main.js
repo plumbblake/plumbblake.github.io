@@ -9,5 +9,6 @@ import "../components/bp-text.js";
 import "../components/bp-polaroid.js";
 import "../components/bp-split.js";
 
-document.querySelector("html").style.opacity = "1";
-document.querySelector("body").style.opacity = "1";
+document
+  .querySelectorAll("html, body")
+  .forEach(element => (element.style.opacity = "1"));
