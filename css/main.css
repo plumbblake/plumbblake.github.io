@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
-@import url("https://fonts.googleapis.com/css?family=Space+Mono");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,700");
 
 :root {
   --background-color: #e0e0e0;
@@ -21,8 +21,14 @@ h2,
 h3,
 h4,
 h5,
-p {
+p,
+hr,
+ul {
   margin: 0;
+}
+
+ul {
+  list-style: none;
 }
 
 html,
