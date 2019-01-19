@@ -8,6 +8,7 @@ import "../components/bp-stack.js";
 import "../components/bp-text.js";
 import "../components/bp-polaroid.js";
 import "../components/bp-split.js";
+import "../components/bp-grid.js";
 
 document
   .querySelectorAll("html, body")
