@@ -7,16 +7,10 @@ class Text1 extends HTMLElement {
     const styles = `
         :host {
             margin: 0;
-            font-size: 28px;
+            font-size: var(--font-size-18);
             line-height: 1.2;
         }  
-
-        @media(min-width: 600px) {
-            :host {
-                font-size: 32px;
-            }
-        }
-        
+           
         :host([center]) {
             text-align: center;
         }

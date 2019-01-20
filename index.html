@@ -11,28 +11,28 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
-    <bp-stack gap-size="32px">
+    <bp-stack gap-size="var(--spacing-32)">
       <bp-section dark>
-        <bp-stack gap-size="64px">
+        <bp-stack gap-size="var(--spacing-64)">
           <bp-header>
             <bp-anchor slot="home" href="./">
-              <bp-image src="./img/profile.jpg"></bp-image>
+              <bp-image alt="Blake Plumb" src="./img/profile.jpg"></bp-image>
             </bp-anchor>
             <bp-anchor active href="./">About</bp-anchor>
             <bp-anchor href="resume.html">Resume</bp-anchor>
             <bp-anchor href="2048-fantasy/">Fun</bp-anchor>
           </bp-header>
-          <bp-stack gap-size="32px">
+          <bp-stack gap-size="var(--spacing-32)">
             <bp-heading1 center>Hello World</bp-heading1>
             <bp-heading2 center>I'm Blake</bp-heading2>
           </bp-stack>
-          <bp-image src="../img/earth.jpg"></bp-image>
+          <bp-image alt="planet earth" src="../img/earth.jpg"></bp-image>
         </bp-stack>
       </bp-section>
       <bp-section>
-        <bp-split vertical-center gap-size="32px" min="250px">
+        <bp-split vertical-center gap-size="var(--spacing-32)" min="15.625rem">
           <bp-polaroid>
-            <bp-image src="../img/family.jpg"></bp-image>
+            <bp-image alt="Blake's Family" src="../img/family.jpg"></bp-image>
           </bp-polaroid>
           <bp-stack>
             <bp-heading2>My World</bp-heading2>

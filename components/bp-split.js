@@ -1,7 +1,7 @@
 class Split extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
-    const gapSize = this.getAttribute("gap-size") || "16px";
+    const gapSize = this.getAttribute("gap-size") || "var(--spacing-16)";
     const rowGapSize = this.getAttribute("row-gap-size");
     const columnGapSize = this.getAttribute("column-gap-size");
 

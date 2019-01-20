@@ -9,18 +9,18 @@ class Section extends HTMLElement {
         }
 
         section {
-            padding: 0 16px;  
+            padding: 0 var(--spacing-16);  
         }
 
-        @media (min-width: 600px){
+        @media (min-width: 37.5rem){
             section {
-                padding: 0 24px;
+                padding: 0 var(--spacing-24);
             }
         }
         
         div {
             width: 100%;
-            max-width: 940px;
+            max-width: 58.75rem;
             margin: 0 auto;
         } 
     `;

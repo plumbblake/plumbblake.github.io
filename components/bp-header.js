@@ -1,3 +1,5 @@
+import "../components/bp-text.js";
+
 class Header extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -9,19 +11,18 @@ class Header extends HTMLElement {
             }
             
             nav {
-                padding-top: 32px;
+                padding-top: var(--spacing-32);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                font-size: 18px;
             }
             
             #home {
                 display: block;
                 border-radius: 50%;
                 overflow: hidden;
-                width: 72px;
-                height: 72px;
+                width: 4.5rem;
+                height: 4.5rem;
             }
 
             #flex {
@@ -29,18 +30,20 @@ class Header extends HTMLElement {
             }
 
             #flex > ::slotted(*){
-                margin-left: 16px;
+                margin-left: var(--spacing-16);
             }
         `;
 
     shadowRoot.innerHTML = `
             <style>${styles}</style>
-            <header>
-                <nav>
-                    <div id="home"><slot name="home"></slot></div>
-                    <div id="flex"><slot></slot></div>
-                </nav>
-            </header>
+            <bp-text1>
+                <header>
+                    <nav>
+                        <div id="home"><slot name="home"></slot></div>
+                        <div id="flex"><slot></slot></div>
+                    </nav>
+                </header>
+            </bp-text1>
         `;
   }
 }

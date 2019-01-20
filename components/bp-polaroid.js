@@ -7,8 +7,8 @@ class Polaroid extends HTMLElement {
     const styles = `
         :host {
             display: block;
-            border: 5px solid var(--white);
-            box-shadow: 0 4px 6px rgba(0,0,0,.3);
+            border: var(--spacing-8) solid var(--white);
+            box-shadow: 0 var(--spacing-4) var(--spacing-8) var(--mask-color);
         }`;
 
     shadowRoot.innerHTML = `

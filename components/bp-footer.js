@@ -1,3 +1,5 @@
+import "../components/bp-text.js";
+
 class Footer extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -9,25 +11,26 @@ class Footer extends HTMLElement {
               }
               
               nav {
-                  padding: 64px 0; 
+                  padding: var(--spacing-64) 0; 
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                  font-size: 18px;
               }
 
               ::slotted(*:not(:first-child)) {
-                margin-left: 16px;
+                margin-left: var(--spacing-16);
               }
           `;
 
     shadowRoot.innerHTML = `
               <style>${styles}</style>
-              <footer>
+              <bp-text1>
+                <footer>
                   <nav>
                       <slot></slot>
                   </nav>
-              </footer>
+                </footer>
+              </bp-text1>
           `;
   }
 }

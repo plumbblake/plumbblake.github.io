@@ -6,7 +6,7 @@ class Stack extends HTMLElement {
         :host {
             display: grid;
             grid-auto-columns: 100%;
-            grid-gap: ${this.getAttribute("gap-size") || "16px"};
+            grid-gap: ${this.getAttribute("gap-size") || "var(--spacing-16)"};
         }`;
 
     shadowRoot.innerHTML = `

@@ -8,15 +8,15 @@ class H1 extends HTMLElement {
     const styles = `
         h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: var(--font-size-32);
             font-weight: 700;
             line-height: 1.2;
             font-family: "Space Mono", sans-serif;
         } 
         
-        @media (min-width: 600px){
+        @media (min-width: 37.5rem){
             h1 {
-                font-size: 42px;
+                font-size: var(--font-size-42);
             }
         }
         
@@ -41,15 +41,15 @@ class H2 extends HTMLElement {
     const styles = `
           h2 {
               margin: 0;
-              font-size: 28px;
+              font-size: var(--font-size-28);
               font-weight: 400;
               line-height: 1.2;
               font-family: "Space Mono", sans-serif;
           } 
           
-          @media (min-width: 600px){
+          @media (min-width: 37.5rem){
               h2 {
-                  font-size: 30px;
+                  font-size: var(--font-size-30);
               }
           }
           
@@ -74,7 +74,7 @@ class H3 extends HTMLElement {
     const styles = `
             h3 {
                 margin: 0;
-                font-size: 20px;
+                font-size: var(--font-size-20);
                 font-weight: 400;
                 line-height: 1.2;
                 font-family: "Space Mono", sans-serif;
@@ -83,7 +83,7 @@ class H3 extends HTMLElement {
             hr {
                 display: inline-block;
                 width: 100%;
-                max-width: 200px;
+                max-width: 12.5rem;
                 border-bottom: 1px solid;
                 margin: 0;
             }
@@ -91,7 +91,7 @@ class H3 extends HTMLElement {
 
     shadowRoot.innerHTML = `
                 <style>${styles}</style>
-                <bp-stack gap-size="4px">
+                <bp-stack gap-size="var(--spacing-4)">
                     <h3 ${spreadAttributes(this.attributes)}><slot></slot></h3>
                     <hr />
                 </bp-stack>
@@ -108,7 +108,7 @@ class H4 extends HTMLElement {
     const styles = `
               h4 {
                   margin: 0;
-                  font-size: 16px;
+                  font-size: var(--font-size-16);
                   font-weight: 700;
                   line-height: 1.2;
                   font-family: "Open Sans", sans-serif;
