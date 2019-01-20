@@ -5,7 +5,7 @@ class Grid extends HTMLElement {
     const styles = `
           :host {
               display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+              grid-template-columns: repeat(auto-fit, minmax(9.4rem, 1fr));
               grid-gap: ${this.getAttribute("gap-size") || "var(--spacing-8)"};
           }`;
 
