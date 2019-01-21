@@ -9,7 +9,8 @@ class Split extends HTMLElement {
         :host {
             display: grid;
             grid-auto-columns: 100%;
-            margin: -${rowGapSize || gapSize} 0 0 -${columnGapSize || gapSize};
+            margin: calc(-1 * ${rowGapSize ||
+              gapSize}) 0 0 calc(-1 * ${columnGapSize || gapSize});
         }
 
         ::slotted(:first-child), ::slotted(:last-child){
