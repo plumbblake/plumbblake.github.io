@@ -48,10 +48,12 @@ body {
   color: var(--text-color);
   font-family: "Open Sans", sans-serif;
   font-size: 100%;
-  opacity: 0;
-  transition: opacity 300ms linear;
 }
 
 * {
   box-sizing: border-box;
+}
+
+*:not(:defined){
+  opacity: 0;
 }

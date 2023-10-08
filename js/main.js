@@ -10,6 +10,3 @@ import "../components/bp-polaroid.js";
 import "../components/bp-split.js";
 import "../components/bp-grid.js";
 
-document
-  .querySelectorAll("html, body")
-  .forEach(element => (element.style.opacity = "1"));
