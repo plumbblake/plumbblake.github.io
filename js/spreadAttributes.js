@@ -1,7 +1,9 @@
-const spreadAttributes = attributes =>
+const spreadAttributes = (attributes, ignore = []) =>
   [...attributes].reduce(
     (accumulator, current) =>
-      `${accumulator} ${current.name}="${current.value}"`,
+      ignore.includes(current.name)
+        ? accumulator
+        : `${accumulator} ${current.name}="${current.value}"`,
     ""
   );
 

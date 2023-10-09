@@ -9,11 +9,12 @@ class Image extends HTMLElement {
             display: block;
             width: 100%;
             height: auto;
+            aspect-ratio: ${this.getAttribute("aspect-ratio") || "auto"};
         }`;
 
     shadowRoot.innerHTML = `
             <style>${styles}</style>
-            <img ${spreadAttributes(this.attributes)} />
+            <img ${spreadAttributes(this.attributes, ["aspect-ratio"])} />
         `;
   }
 }

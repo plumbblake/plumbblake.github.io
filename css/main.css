@@ -55,5 +55,6 @@ body {
 }
 
 *:not(:defined){
+  display: block;
   opacity: 0;
 }
